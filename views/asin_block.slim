@@ -1,0 +1,50 @@
+- price = @item.get('OfferSummary/LowestNewPrice/FormattedPrice') || @item.get('ItemAttributes/ListPrice/FormattedPrice')
+- used_price = @item.get('OfferSummary/LowestUsedPrice/FormattedPrice')
+- collector_price = @item.get('OfferSummary/LowestCollectiblePrice/FormattedPrice')
+- author = @item.get_array('ItemAttributes/Author')
+- artist = @item.get_array('ItemAttributes/Artist')
+
+.amazon-block
+  .image
+    a href = @item.get('DetailPageURL') target="_blank"
+      img src = @item.get('LargeImage/URL')
+
+  .title
+    a href = @item.get('DetailPageURL') target="_blank"
+      = @item.get('ItemAttributes/Title')
+
+  - if artist && artist.size > 0
+    .artist
+      = artist.join(', ')
+
+  - if author && author.size > 0
+    .author
+      = author.join(', ')
+
+  .label
+    = @item.get('ItemAttributes/Label')
+
+  .binding
+    = @item.get('ItemAttributes/Binding')
+
+  / - if price
+  /   .price
+  /     | 価格: 
+  /     = price
+
+  / - if used_price
+  /   .price.used
+  /     | 中古価格: 
+  /     = used_price
+
+  / - if collector_price
+  /   .price.collector
+  /     | コレクター価格: 
+  /     = collector_price
+
+  .rank
+    | Sales Rank: 
+    = @item.get('SalesRank')
+
+  a.link href = @item.get('DetailPageURL')
+    | Amazonで詳細を見る

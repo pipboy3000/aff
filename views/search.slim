@@ -1,0 +1,26 @@
+- if @items.size > 0
+  .search-info
+    .item
+      .label
+        | Total resulsts 
+      .data
+        = @total_resulsts
+    .item
+      .label
+        | Total pages 
+      .data
+        = @total_pages
+
+== slim :search_result
+
+/ - if @items.size > 0 and @total_pages > 1
+/   .page-box
+/     ul.container
+/       - (1..5).each do |page|
+/         - if @total_pages >= page
+/           li.item
+/             - if @page.to_i == page
+/               = page
+/             - else
+/               a href="?page=#{page}"
+/                 = page

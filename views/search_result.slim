@@ -1,0 +1,20 @@
+p
+  | Page: #{@page}
+div.search-result.pure-g data-page="#{@page}"
+  - @items.each do |item|
+    .pure-u-1.pure-u-md-1-2
+      .item.card-area
+        .image
+          - if item.get('MediumImage/URL')
+            img src = item.get('MediumImage/URL')
+        .title
+          = item.get('ItemAttributes/Title')
+        .binding
+          = item.get('ItemAttributes/Binding')
+        .rank
+          | Sales Rank: 
+          = item.get('SalesRank')
+        .link
+          a.pure-button.pure-button-primary href = "/asin/#{item.get('ASIN')}"
+            i.fa.fa-code
+            | Create HTML code

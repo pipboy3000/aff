@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css"
+    link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css"
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    link rel="stylesheet" href="/style.css"
+    title AFF
+  body
+    .header
+      .site-title
+        a href="/"
+          | AFF
+      .search-form
+        form action="/search"
+          i.fa.fa-search
+          input.keyword type="text" value = params[:keyword] placeholder="Search keyword" required=""
+      .spinner.-hide
+        .rect1
+        .rect2
+        .rect3
+        .rect4
+        .rect5
+
+    .container
+      == yield
+
+    .footer
+
+    script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"
+    script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.5/clipboard.min.js"
+    javascript:
+      new Clipboard('.copy-button');
+
+      // search form
+      var form = $('.search-form form');
+      var keyword = $('.search-form .keyword');
+      var loadingIcon = $('.header .spinner');
+      
+      function onSubmit(e) {
+        e.preventDefault();
+        loadingIcon.removeClass('-hide');
+        location.href = '/search/' + keyword.val();
+      }
+
+      form.on('submit', onSubmit);
+      keyword.on('blur', onSubmit);
+
+      function pageBottomSpace() {
+        return $(document).height() - (window.scrollY + window.innerHeight);
+      }
+
+      var ajaxLoding = false;
+      $(window).on('scroll', function() {
+        if (pageBottomSpace() < 200) {
+          if (ajaxLoding) return;
+          var nextPage = $('.search-result:last').data('page') + 1;
+          if (nextPage > 5) return;
+
+          $.ajax({
+            type: 'GET',
+            url: '/search/#{params[:keyword]}',
+            data: {page: nextPage}
+          })
+          .done(function(res) {
+            $('.search-result:last').after(res);
+            ajaxLoding = false;
+          });
+          ajaxLoding = true;
+        }
+      });

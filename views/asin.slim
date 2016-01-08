@@ -1,0 +1,19 @@
+.card-area
+  == slim :asin_block
+
+.source-code
+  textarea.contents#source-block
+    = slim :asin_block
+  a.copy-button.pure-button data-clipboard-target="#source-block"
+    i.fa.fa-clipboard
+    | Copy
+
+.card-area
+  == slim :asin_inline
+
+.source-code
+  textarea.contents#source-inline
+    = slim :asin_inline
+  a.copy-button.pure-button data-clipboard-target="#source-inline"
+    i.fa.fa-clipboard
+    | Copy
