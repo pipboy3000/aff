@@ -7,6 +7,7 @@ gem "sinatra"
 gem "sinatra-contrib"
 gem "amazon-ecs"
 gem "slim"
+gem "sass"
 
 group :developemnt do
 end
