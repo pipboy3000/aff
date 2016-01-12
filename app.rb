@@ -1,6 +1,10 @@
 require 'sinatra'
 require 'amazon/ecs'
-require 'sinatra/reloader' if development?
+if development?
+  require 'sinatra/reloader'
+  require 'dotenv'
+  Dotenv.load
+end
 
 class AmazonError < StandardError;end
 

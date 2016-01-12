@@ -10,4 +10,5 @@ gem "slim"
 gem "sass"
 
 group :developemnt do
+  gem "dotenv"
 end
