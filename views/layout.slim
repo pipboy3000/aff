@@ -35,11 +35,11 @@ html
       // search form
       var form = $('.search-form form');
       var keyword = $('.search-form .keyword');
-      var loadingIcon = $('.header .spinner');
+      var searchLoadIcon = $('.header .spinner');
       
       function onSubmit(e) {
         e.preventDefault();
-        loadingIcon.removeClass('-hide');
+        searchLoadIcon.removeClass('-hide');
         location.href = '/search/' + keyword.val();
       }
 
@@ -50,10 +50,10 @@ html
         return $(document).height() - (window.scrollY + window.innerHeight);
       }
 
-      var ajaxLoding = false;
+      var pageLoad = false;
       $(window).on('scroll', function() {
         if (pageBottomSpace() < 200) {
-          if (ajaxLoding) return;
+          if (pageLoad) return;
           var nextPage = $('.search-result:last').data('page') + 1;
           if (nextPage > 5) return;
 
@@ -64,8 +64,10 @@ html
           })
           .done(function(res) {
             $('.search-result:last').after(res);
-            ajaxLoding = false;
+            pageLoad = false;
+            $('.search-result .spinner').addClass('-hide');
           });
-          ajaxLoding = true;
+          pageLoad = true;
+          $('.search-result:last .spinner').removeClass('-hide');
         }
       });
