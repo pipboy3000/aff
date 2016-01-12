@@ -8,7 +8,7 @@ before do
   Amazon::Ecs.configure do |options|
     options[:AWS_access_key_id] = ENV['PAA_AWS_ID']
     options[:AWS_secret_key]    = ENV['PAA_AWS_SECRET']
-    options[:associate_tag]     = 'count-0_22'
+    options[:associate_tag]     = ENV['ASSOCIATE_TAG']
     options[:response_group]    = 'Medium'
   end
 end
