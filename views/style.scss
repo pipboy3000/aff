@@ -65,6 +65,7 @@ body > .header {
   color: #eee;
   display: flex;
   background: #D4CAC9;
+  min-height: 40px;
 
   .search-form {
     flex: 1;
@@ -201,6 +202,7 @@ body > .container {
 
   &.-hide {
     visibility: hidden;
+    display: none;
     -webkit-animation-play-state: initial;
     animation-play-state: initial;
   }
