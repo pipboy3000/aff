@@ -6,11 +6,11 @@
 
 .amazon-block
   .image
-    a href = @item.get('DetailPageURL') target="_blank"
+    a href = @url target="_blank"
       img src = @item.get('LargeImage/URL')
 
   .title
-    a href = @item.get('DetailPageURL') target="_blank"
+    a href = @url target="_blank"
       = @item.get('ItemAttributes/Title')
 
   - if artist && artist.size > 0
@@ -46,5 +46,5 @@
     | Sales Rank: 
     = @item.get('SalesRank')
 
-  a.link href = @item.get('DetailPageURL')
+  a.link href = @url
     | Amazonで詳細を見る
