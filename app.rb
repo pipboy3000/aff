@@ -82,5 +82,6 @@ end
 get '/asin/:asin' do
   halt 400, 'エラー!ASINは10桁の番号です' if params[:asin].size != 10
   @item = lookup(params[:asin])
+  @url = "http://www.amazon.co.jp/exec/obidos/ASIN/#{params[:asin]}/#{ENV['ASSOCIATE_TAG']}"
   slim :asin
 end
