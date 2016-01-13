@@ -59,6 +59,10 @@ a {
       margin: 0 auto;
     }
   }
+
+  .link {
+    margin-bottom: 5px;
+  }
 }
 
 body > .header {
@@ -188,6 +192,12 @@ body > .container {
 .copy-button {
   font-size: 80%;
   background-color: #D25303;
+  color: white;
+}
+
+.generate-button {
+  font-size: 80%;
+  background-color: #2969A5;
   color: white;
 }
 
