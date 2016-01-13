@@ -48,6 +48,10 @@ helpers do
       return response
     end
   end
+
+  def amazon_url(asin, associate_tag)
+   "http://www.amazon.co.jp/exec/obidos/ASIN/#{asin}/#{associate_tag}" 
+  end
 end
 
 %w(/ /search /search/?).each do |path|
@@ -82,6 +86,6 @@ end
 get '/asin/:asin' do
   halt 400, 'エラー!ASINは10桁の番号です' if params[:asin].size != 10
   @item = lookup(params[:asin])
-  @url = "http://www.amazon.co.jp/exec/obidos/ASIN/#{params[:asin]}/#{ENV['ASSOCIATE_TAG']}"
+  @url = amazon_url(params[:asin], ENV['ASSOCIATE_TAG'])
   slim :asin
 end

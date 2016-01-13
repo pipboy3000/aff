@@ -15,7 +15,11 @@ div.search-result.pure-g data-page="#{@page}"
           | Sales Rank: 
           = item.get('SalesRank')
         .link
-          a.pure-button.pure-button-primary href = "/asin/#{item.get('ASIN')}"
+          a.copy-button.pure-button data-clipboard-text = amazon_url(item.get('ASIN'), ENV['ASSOCIATE_TAG'])
+            i.fa.fa-clipboard
+            | Copy URL only
+        .link
+          a.generate-button.pure-button href = "/asin/#{item.get('ASIN')}"
             i.fa.fa-code
             | Create HTML code
   .spinner.-hide
