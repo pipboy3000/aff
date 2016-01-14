@@ -39,6 +39,11 @@ html
       
       function onSubmit(e) {
         e.preventDefault();
+        
+        if (keyword.val().length == 0) {
+          return;
+        }
+
         searchLoadIcon.removeClass('-hide');
         location.href = '/search/' + keyword.val();
       }
